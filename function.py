@@ -11,10 +11,11 @@ class funct:
         self.y = 0
 
     def ff(self):
-        self.y += sin((self.a))/cos((self.b)) + sqrt(self.c)
-        print (self.y)
-        print (sin(self.a))
-        print (cos(self.b))
+        if self.c >= 0:
+            self.y += sin((self.a))/cos((self.b)) + sqrt(self.c)
+            print (self.y)
+        else:
+            print('ОШИБКА - отрицательное число под корнем')
     
 
 
@@ -26,3 +27,10 @@ funct.ff(fu)
 
 'второй тест с учетом углов в радианах'
 'ожидаемый ответ 7.893996, полученный ответ 7.893996'
+
+'третий тест с попыткой возведения отрицательного числа под корень'
+'ожидаемый ответ: ОШИБКА, полученный ответ 7.893996'
+'исправление: добавлен if'
+
+
+
