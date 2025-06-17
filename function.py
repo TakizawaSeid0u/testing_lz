@@ -2,6 +2,7 @@ from math import sqrt
 from math import sin
 from math import cos
 import math
+from math import pi
 
 class funct:
     def __init__(self, a, b, c):
@@ -19,7 +20,7 @@ class funct:
     
 
 
-fu = funct(90, 0, 49)
+fu = funct(90, (pi/2), 49)
 funct.ff(fu)
 'первый тест на работу без ошибок'
 'ожидается ответ 8, полученный ответ 7.89'
@@ -37,4 +38,7 @@ funct.ff(fu)
 
 'пятый тест'
 'ожидаемый ответ: 7.893996, полученный ответ: 7.893996'
+
+'шестой тест  (попытка деления на 0)'
+'ожидаемый ответ: ОШИБКА - деление на 0, полученный ответ: 1.46000734942188e+16'
 
