@@ -1,44 +1,42 @@
-from math import sqrt
-from math import sin
-from math import cos
-import math
-from math import pi
+from math import sin, cos, sqrt, isclose, pi
 
-class funct:
+class func:
     def __init__(self, a, b, c):
         self.a = a
         self.b = b
         self.c = c
-        self.y = 0
+        self.y = 0.0
 
-    def ff(self):
-        if self.c >= 0:
-            self.y += sin((self.a))/cos((self.b)) + sqrt(self.c)
-            print (self.y)
-        else:
-            print('ОШИБКА - отрицательное число под корнем')
+    def funn(self):
+        try:
+            if not all(isinstance(x, (int, float)) for x in [self.a, self.b, self.c]):
+                raise TypeError("все параметры должны быть числами")
+            
+            z = cos(self.b)
+            if isclose(z, 0, abs_tol=1e-10):
+                raise ValueError("cos(b) слишком близок к нулю значит деление невозможно")
+            if self.c < 0:
+                raise ValueError("отрицательное под корнем")
+            result = sin(self.a) / z + sqrt(self.c)
+            self.y += result
+            return result
+        except Exception as e:
+            print(f"ошибка вычисления: {str(e)}")
+            return None
+
+if __name__ == "__main__":
+    print("Тест 1: все нормально")
+    ff1 = func(1.0, 0.5, 4.0)
+    print(ff1.funn()) 
     
-
-
-fu = funct(90, (pi/2), 49)
-funct.ff(fu)
-'первый тест на работу без ошибок'
-'ожидается ответ 8, полученный ответ 7.89'
-'в чем ошибка: не учел что питон считает в радианах'
-
-'второй тест с учетом углов в радианах'
-'ожидаемый ответ 7.893996, полученный ответ 7.893996'
-
-'третий тест с попыткой возведения отрицательного числа под корень'
-'ожидаемый ответ: ОШИБКА, полученный ответ: 7.893996'
-'исправление: добавлен if'
-
-'четвертый тест на правильность исправления после третьего теста'
-'ожидаемый ответ: ОШИБКА - отрицательное число под корнем, полученный ответ: ОШИБКА - отрицательное число под корнем '
-
-'пятый тест'
-'ожидаемый ответ: 7.893996, полученный ответ: 7.893996'
-
-'шестой тест  (попытка деления на 0)'
-'ожидаемый ответ: ОШИБКА - деление на 0, полученный ответ: 1.46000734942188e+16'
-
+    print("Тест 2: попытка деления на 0")
+    ff2 = func(0, pi/2, 1)
+    ff2.funn()
+    
+    print("Тест 3: отрицательное под корнем")
+    ff3 = func(0, 0, -1)
+    ff3.funn()
+    
+    print("Тест 4: данные не того типа")
+    ff4 = func("1", 0, 1)
+    ff4.funn()
