@@ -1,28 +1,22 @@
-import math
-from function import func
+from function import funcia
 import unittest
-from math import pi
 
+class Testfuncia(unittest.TestCase):
 
+    def test_zero_division(self):
+        self.assertEqual(funcia("30", "90", "9"), "Ошибка! деление на ноль")
 
-result = func("",3,4)
-   
-class AH(unittest.TestCase):
+    def test_negative_under_root(self):
+        self.assertEqual(funcia("45", "45", "-9"), "Ошибка ввода! значение c должно быть неотрицательным")
 
-    def test(self):
-        self.assertEqual(func(0, pi/2, 1),'деление на ноль')
+    def test_non_numeric(self):
+        self.assertEqual(funcia("abc", "60", "5"),"Ошибка ввода! введено не число")
 
-    def test_num_under_the_root(self):
-        self.assertEqual(func(pi, pi/2, 49), 'извлечение корня из отрицательного числа')
-    
-    def test_strings(self):
-        self.assertEqual(func("",pi/2,49),'ошибка типов данных')
+    def test_empty_input(self):
+        self.assertEqual(funcia("", "45", "5"), "Ошибка ввода! пустой ввод")
 
-    
+    def test_type_error(self):
+        self.assertEqual(funcia(["30"], "45", "4"), "Ошибка! неверный тип данных")
+
 if __name__ == "__main__":
-    unittest.main() 
-
-
-'''1.деление на 0
-2.отрицательное под корнем
-3.не тот тип данных'''
+    unittest.main()
